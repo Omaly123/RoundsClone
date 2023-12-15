@@ -1,0 +1,8 @@
+res://player.tscn
+res://Player.gd
+res://Levels/TestScene.tscn
+res://bullet.tscn
+res://MultiplayerScene.tscn
+res://chamber_bullet.tscn
+res://Levels/Testscene2.tscn
+res://TestCard.tscn

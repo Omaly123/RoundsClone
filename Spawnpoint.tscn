@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://ds8gf8kuxqmo5"]
+
+[node name="0" type="Node2D" groups=["PlayerSpawnPoint"]]
+position = Vector2(169, 483)

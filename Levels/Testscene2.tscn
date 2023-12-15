@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc2dwiphvfud4"]
+
+[ext_resource type="Script" path="res://Levels/Testscene2.gd" id="1_i7kg4"]
+[ext_resource type="PackedScene" uid="uid://ds8gf8kuxqmo5" path="res://Spawnpoint.tscn" id="1_phigj"]
+[ext_resource type="PackedScene" uid="uid://duex8pj47musi" path="res://player.tscn" id="2_mvtkx"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_i7kg4")
+PlayerScene = ExtResource("2_mvtkx")
+
+[node name="Spawnpoints" type="Node2D" parent="."]
+
+[node name="0" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(89, 565)
+
+[node name="1" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(1068, 561)
+
+[node name="2" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(646, 320)
+
+[node name="3" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(258, 510)
+
+[node name="4" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(802, 471)
+
+[node name="5" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(389, 396)
+
+[node name="6" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(445, 335)
+
+[node name="7" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(906, 550)
+
+[node name="8" parent="Spawnpoints" instance=ExtResource("1_phigj")]
+position = Vector2(533, 248)
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment"]
+position = Vector2(55, 21)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/StaticBody2D"]
+position = Vector2(53, 491)
+polygon = PackedVector2Array(-106, 133, 1044, 136, 1041, -464, 1001, -465, 1004, 99, 766, 89, 437, -218, 247.395, 36.7821, -67, 94, -68, -470, 1043, -464, 1043, -512, -108, -513)
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/StaticBody2D/CollisionPolygon2D"]
+position = Vector2(-109, -512)

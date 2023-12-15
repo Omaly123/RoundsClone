@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0tpoa1qsqje0"]
+
+[ext_resource type="Texture2D" uid="uid://5ihddvra8s4e" path="res://Assets/ChamberBullet.png" id="1_xjr63"]
+
+[node name="ChamberBullet" type="Node2D"]
+
+[node name="ChamberBullet" type="Sprite2D" parent="."]
+texture = ExtResource("1_xjr63")

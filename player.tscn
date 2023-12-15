@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://duex8pj47musi"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_xonyj"]
+[ext_resource type="PackedScene" uid="uid://c1lxgd1fvy1x2" path="res://bullet.tscn" id="2_r30wm"]
+[ext_resource type="Texture2D" uid="uid://bwl1mbca656v4" path="res://Assets/DottyBlink.png" id="2_tp5fo"]
+[ext_resource type="PackedScene" uid="uid://d0tpoa1qsqje0" path="res://chamber_bullet.tscn" id="3_5pfwu"]
+[ext_resource type="Texture2D" uid="uid://ckko3youfrkmu" path="res://Assets/gun.png" id="3_h6j6i"]
+[ext_resource type="Texture2D" uid="uid://cq5bnofq10lgm" path="res://Assets/Block.png" id="5_yvphm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrhc8"]
+atlas = ExtResource("2_tp5fo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78l4m"]
+atlas = ExtResource("2_tp5fo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvj61"]
+atlas = ExtResource("2_tp5fo")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4e5f"]
+atlas = ExtResource("2_tp5fo")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d4qkn"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_vrhc8")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_78l4m")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_kvj61")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_b4e5f")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_kvj61")
+}, {
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_78l4m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mu4ur"]
+radius = 16.0312
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ukupx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("GunRotation:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_xonyj")
+bullet = ExtResource("2_r30wm")
+chamber_bullet = ExtResource("3_5pfwu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d4qkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mu4ur")
+
+[node name="GunRotation" type="Node2D" parent="."]
+
+[node name="Gun" type="Sprite2D" parent="GunRotation"]
+texture_filter = 1
+position = Vector2(26, 0)
+texture = ExtResource("3_h6j6i")
+
+[node name="BulletSpawn" type="Node2D" parent="GunRotation"]
+position = Vector2(23, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ukupx")
+
+[node name="Block" type="Sprite2D" parent="."]
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("5_yvphm")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -17.0
+offset_top = -22.0
+offset_right = 17.0
+offset_bottom = -18.0
+theme_override_colors/font_color = Color(0.698039, 0, 0, 1)
+show_percentage = false
