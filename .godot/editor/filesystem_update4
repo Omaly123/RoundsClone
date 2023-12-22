@@ -6,3 +6,6 @@ res://MultiplayerScene.tscn
 res://chamber_bullet.tscn
 res://Levels/Testscene2.tscn
 res://TestCard.tscn
+res://Card.tscn
+res://bullet.gd
+res://GameManager.gd

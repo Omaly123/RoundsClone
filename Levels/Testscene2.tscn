@@ -48,3 +48,4 @@ polygon = PackedVector2Array(-106, 133, 1044, 136, 1041, -464, 1001, -465, 1004,
 
 [node name="Polygon2D" type="Polygon2D" parent="Environment/StaticBody2D/CollisionPolygon2D"]
 position = Vector2(-109, -512)
+polygon = PackedVector2Array(1110, 48, 1151, 48, 1153, 649, 1, 645, 0, 0, 1150, 1, 1152, 48, 41, 42, 42, 606, 355, 549, 546, 295, 875, 600, 1112, 611)
