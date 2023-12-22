@@ -1,28 +1,29 @@
 extends CharacterBody2D
 
 
-var SPEED = 300.0
-var JUMP_VELOCITY = -400.0
-var JUMP_FORCE_UP = 5
-var JUMP_FORCE_DOWN = 10
+@export var SPEED = 300.0
+@export var JUMP_VELOCITY = -400.0
+@export var JUMP_FORCE_UP = 5
+@export var JUMP_FORCE_DOWN = 10
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var blocking = 0
-var attackCD = 60 #60 delta is 1sec
+@export var attackCD = 60 #60 delta is 1sec
 var attackCDTimer = 300
-var blockCD = 60 #60 delta is 1sec
+@export var blockCD = 60 #60 delta is 1sec
 var blockCDTimer = 0
 var cards : Array
-var damage = 10
-var bullet_speed = 600
-var max_ammo = 88
+@export var damage = 30
+@export var bullet_speed = 600
+@export var bounces = 0
+@export var max_ammo = 3
 var ammo = 3
-var reloadCD = 300
+@export var reloadCD = 300
 var reloadCDTimer = 600
 var chamber : Array
 var health = 100
-var max_health = 100
+@export var max_health = 100
 @export var bullet: PackedScene
 @export var chamber_bullet: PackedScene
 signal died
@@ -36,9 +37,9 @@ func _process(delta):
 	if health <= 0: death.rpc()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		$GunRotation.look_at(get_viewport().get_mouse_position())
-		if Input.is_action_just_pressed("leftclick"):
+		if Input.is_action_just_pressed("leftclick") && attackCDTimer <= 0:
 			fire.rpc()
-		if Input.is_action_just_pressed("rightclick"):
+		if Input.is_action_just_pressed("rightclick") && blockCDTimer <= 0:
 			block_start.rpc()
 		if blocking >= 1:
 			blocking -=1
@@ -49,6 +50,9 @@ func _process(delta):
 	#reloading:
 	if reloadCDTimer > 0 && chamber.size() < max_ammo: reloadCDTimer -= 1
 	if reloadCDTimer == 0: reload.rpc()
+	#cooldowns:
+	if attackCDTimer > 0: attackCDTimer -= 1
+	if blockCDTimer > 0: blockCDTimer -= 1
 	pass
 
 
@@ -56,14 +60,17 @@ func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		# Add the gravity.
 		if not is_on_floor():
-			velocity.y += gravity * delta
+			if is_on_wall() && velocity.y > 0:
+				velocity.y += gravity * delta *0.2
+			else:
+				velocity.y += gravity * delta
 			if Input.is_action_pressed("bt_w") or Input.is_action_pressed("space"):
 				velocity.y -= JUMP_FORCE_UP
 			if Input.is_action_pressed("bt_s"):
 				velocity.y += JUMP_FORCE_DOWN
 		
 		# Handle Jump.
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if Input.is_action_just_pressed("ui_accept") and(is_on_floor() or is_on_wall()):
 			velocity.y = JUMP_VELOCITY
 
 		# Get the input direction and handle the movement/deceleration.
@@ -85,10 +92,12 @@ func fire():
 		b.SPEED = bullet_speed
 		b.shooter = $"."
 		b.damage = damage
+		b.bounces = bounces
 		#print($GunRotation/BulletSpawn.rotation)
 		get_tree().root.add_child(b)
 		chamber[chamber.size()-1].queue_free()
 		chamber.remove_at(chamber.size()-1)
+		attackCDTimer = attackCD
 
 @rpc("any_peer","call_local")
 func hit(damage, effects):
@@ -104,7 +113,7 @@ func block_start():
 @rpc("any_peer","call_local")
 func block_end():
 	pass
-	
+
 @rpc("any_peer","call_local")
 func reload():
 	print("reload")
@@ -117,7 +126,7 @@ func reload():
 			#print($GunRotation/BulletSpawn.rotation)
 			$GunRotation.add_child(b)
 	reloadCDTimer = reloadCD
-	
+
 @rpc("any_peer","call_local")
 func death():
 	died.emit()
