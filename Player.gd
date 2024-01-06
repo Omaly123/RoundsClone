@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY = -400.0
 @export var JUMP_FORCE_UP = 5
 @export var JUMP_FORCE_DOWN = 10
+var Cards = {}
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -23,6 +24,9 @@ var ammo = 3
 var reloadCDTimer = 600
 var chamber : Array
 var health = 100
+var poison_stacks = 0
+var poison_timer = 0
+
 @export var max_health = 100
 @export var bullet: PackedScene
 @export var chamber_bullet: PackedScene
@@ -53,6 +57,7 @@ func _process(delta):
 	#cooldowns:
 	if attackCDTimer > 0: attackCDTimer -= 1
 	if blockCDTimer > 0: blockCDTimer -= 1
+	poison_tick()
 	pass
 
 
@@ -98,25 +103,41 @@ func fire():
 		chamber[chamber.size()-1].queue_free()
 		chamber.remove_at(chamber.size()-1)
 		attackCDTimer = attackCD
+		for i in cards:
+			cards[i].shoot_effect()
 
 @rpc("any_peer","call_local")
-func hit(damage, effects):
+func hit(damage, shooter):
+	for i in cards:
+		cards[i].got_hit_effect(shooter)
+	take_damage(damage)
+	pass
+
+func take_damage(damage:int):
+	for i in cards:
+		cards[i].damage_effect(damage)
 	health -= damage
 	pass
 
 @rpc("any_peer","call_local")
 func block_start():
+	for i in cards:
+		cards[i].block_start_effect()
 	$Block.visible = true
 	blocking = 30
 	pass
 
 @rpc("any_peer","call_local")
 func block_end():
+	for i in cards:
+		cards[i].block_end_effect()
 	pass
 
 @rpc("any_peer","call_local")
 func reload():
 	print("reload")
+	for i in cards:
+		cards[i].reload_effect()
 	for i in max_ammo:
 		if chamber.size() <= i:
 			var b = chamber_bullet.instantiate()
@@ -126,13 +147,29 @@ func reload():
 			#print($GunRotation/BulletSpawn.rotation)
 			$GunRotation.add_child(b)
 	reloadCDTimer = reloadCD
+	pass
+	
+func poison_tick():
+	if poison_stacks > 0:
+		take_damage(poison_stacks)
+		poison_stacks = floor(poison_stacks*0.5)
+	if poison_timer > 0: poison_timer -= 1
+	if poison_timer == 0: poison_stacks = 0
+	pass
 
 @rpc("any_peer","call_local")
 func death():
+	for i in cards:
+		cards[i].death_effect()
 	died.emit()
-	print(name + "ded")
 	$AnimatedSprite2D.hide()
 	$CollisionShape2D.disabled = true
 	$GunRotation/Gun.hide()
 	pass
 
+func add_card(card):
+	add_child(card)
+	Cards.append(card)
+	card.player = $"."
+	card.pick_effect()
+	card.add_effects()

@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://0p3dspsg7vuu"]
+
+[ext_resource type="Texture2D" uid="uid://dqcnogrnx2p7y" path="res://Assets/TestCardBackround.png" id="1_wskmn"]
+
+[node name="PickScene" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+
+[node name="TextureButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 121.0
+offset_right = 217.0
+offset_bottom = 419.0
+texture_normal = ExtResource("1_wskmn")
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 122.0
+offset_right = 445.0
+offset_bottom = 420.0
+texture_normal = ExtResource("1_wskmn")
+stretch_mode = 0
+
+[node name="TextureButton3" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 469.0
+offset_top = 120.0
+offset_right = 671.0
+offset_bottom = 418.0
+texture_normal = ExtResource("1_wskmn")
+stretch_mode = 0
+
+[node name="TextureButton4" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 696.0
+offset_top = 120.0
+offset_right = 898.0
+offset_bottom = 418.0
+texture_normal = ExtResource("1_wskmn")
+stretch_mode = 0
+
+[node name="TextureButton5" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 917.0
+offset_top = 122.0
+offset_right = 1119.0
+offset_bottom = 420.0
+texture_normal = ExtResource("1_wskmn")
+stretch_mode = 0

@@ -1,11 +1,13 @@
 res://player.tscn
+res://Cards/blueprint/Card.gd
+res://Cards/testcard.gd
 res://Player.gd
 res://Levels/TestScene.tscn
 res://bullet.tscn
 res://MultiplayerScene.tscn
 res://chamber_bullet.tscn
+res://triangle.tscn
 res://Levels/Testscene2.tscn
-res://TestCard.tscn
-res://Card.tscn
-res://bullet.gd
-res://GameManager.gd
+res://Cards/testcard.tscn
+res://pick_scene.tscn
+res://Levels/Scene1.tscn

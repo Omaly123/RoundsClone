@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://bi4g1c21gb6r5"]
+
+[ext_resource type="Script" path="res://Cards/blueprint/Card.gd" id="1_32tgn"]
+
+[resource]
+script = ExtResource("1_32tgn")
+card_name = ""
+card_text = ""

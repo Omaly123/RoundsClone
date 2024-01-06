@@ -1,0 +1,7 @@
+[gd_resource type="CanvasTexture" load_steps=2 format=3 uid="uid://bn6hvltwhj0oj"]
+
+[ext_resource type="Texture2D" uid="uid://5ihddvra8s4e" path="res://Assets/ChamberBullet.png" id="1_fqi4y"]
+
+[resource]
+diffuse_texture = ExtResource("1_fqi4y")
+specular_color = Color(0.462745, 0, 0.380392, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://duex8pj47musi"]
+[gd_scene load_steps=15 format=3 uid="uid://duex8pj47musi"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_xonyj"]
 [ext_resource type="PackedScene" uid="uid://c1lxgd1fvy1x2" path="res://bullet.tscn" id="2_r30wm"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d0tpoa1qsqje0" path="res://chamber_bullet.tscn" id="3_5pfwu"]
 [ext_resource type="Texture2D" uid="uid://ckko3youfrkmu" path="res://Assets/gun.png" id="3_h6j6i"]
 [ext_resource type="Texture2D" uid="uid://cq5bnofq10lgm" path="res://Assets/Block.png" id="5_yvphm"]
+[ext_resource type="Script" path="res://Label.gd" id="7_0ds1b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vrhc8"]
 atlas = ExtResource("2_tp5fo")
@@ -64,6 +65,7 @@ properties/1/watch = false
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xonyj")
+bounces = 20
 bullet = ExtResource("2_r30wm")
 chamber_bullet = ExtResource("3_5pfwu")
 
@@ -97,3 +99,12 @@ offset_right = 17.0
 offset_bottom = -18.0
 theme_override_colors/font_color = Color(0.698039, 0, 0, 1)
 show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+offset_left = -69.0
+offset_top = -44.0
+offset_right = 69.0
+offset_bottom = -18.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_0ds1b")

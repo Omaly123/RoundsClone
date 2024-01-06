@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjsoutc34c8ir"]
 
-[ext_resource type="Script" path="res://SceneManager.gd" id="1_um0ao"]
+[ext_resource type="Script" path="res://Levels/SceneManager.gd" id="1_gnnjr"]
 [ext_resource type="PackedScene" uid="uid://duex8pj47musi" path="res://player.tscn" id="2_cafco"]
 [ext_resource type="Texture2D" uid="uid://b12dugbcpylxk" path="res://Assets/icon.svg" id="3_n62bh"]
 
@@ -19,8 +19,8 @@ size = Vector2(89, 643)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5t4yb"]
 size = Vector2(199, 112)
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_um0ao")
+[node name="Testscene" type="Node2D"]
+script = ExtResource("1_gnnjr")
 PlayerScene = ExtResource("2_cafco")
 
 [node name="Environment" type="Node2D" parent="."]

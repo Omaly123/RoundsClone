@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="RoundsClone"
+run/main_scene="res://MultiplayerScene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://Assets/icon.svg"
 
 [autoload]
 
 GameManager="*res://GameManager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 
