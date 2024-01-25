@@ -12,7 +12,7 @@ properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = false
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="Bullet" type="CharacterBody2D" groups=["Bullet"]]
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_fad0m")

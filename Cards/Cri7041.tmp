@@ -4,13 +4,11 @@
 script/source = "extends Card
 
 var crit_chance_percent = 10
-var rng = RandomNumberGenerator.new()
+
 func hit_effect(player, damage):
-	rng.randomize()
-	var random_percent = rng.randi_range(1,100)
+	var random_percent = randi_range(1,100)
 	if random_percent <= crit_chance_percent:
 		player.take_damage(damage)
-		pass
 "
 
 [resource]
@@ -29,6 +27,6 @@ block_cooldown_seconds = 0
 block_cooldown_percent = 0
 reload_cooldown_percent = 0
 reload_cooldown_seconds = 0
-ammo = 2
+ammo = 0
 speed = 0
 speed_percent = 0

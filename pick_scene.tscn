@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://0p3dspsg7vuu"]
+[gd_scene load_steps=3 format=3 uid="uid://0p3dspsg7vuu"]
 
+[ext_resource type="Script" path="res://pick_scene.gd" id="1_5feyh"]
 [ext_resource type="Texture2D" uid="uid://dqcnogrnx2p7y" path="res://Assets/TestCardBackround.png" id="1_wskmn"]
 
 [node name="PickScene" type="Node2D"]
+script = ExtResource("1_5feyh")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

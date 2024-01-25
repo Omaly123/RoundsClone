@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://duex8pj47musi"]
+[gd_scene load_steps=17 format=3 uid="uid://duex8pj47musi"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_xonyj"]
 [ext_resource type="PackedScene" uid="uid://c1lxgd1fvy1x2" path="res://bullet.tscn" id="2_r30wm"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ckko3youfrkmu" path="res://Assets/gun.png" id="3_h6j6i"]
 [ext_resource type="Texture2D" uid="uid://cq5bnofq10lgm" path="res://Assets/Block.png" id="5_yvphm"]
 [ext_resource type="Script" path="res://Label.gd" id="7_0ds1b"]
+[ext_resource type="Script" path="res://score.gd" id="8_c8crk"]
+[ext_resource type="Script" path="res://username.gd" id="8_xlqrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vrhc8"]
 atlas = ExtResource("2_tp5fo")
@@ -62,10 +64,15 @@ properties/1/path = NodePath("GunRotation:rotation")
 properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
+properties/2/path = NodePath("Block:visible")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_xonyj")
-bounces = 20
+bounces = 50
+max_ammo = 8
 bullet = ExtResource("2_r30wm")
 chamber_bullet = ExtResource("3_5pfwu")
 
@@ -89,6 +96,7 @@ position = Vector2(23, 0)
 replication_config = SubResource("SceneReplicationConfig_ukupx")
 
 [node name="Block" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.5625, 0.5625)
 texture = ExtResource("5_yvphm")
 
@@ -102,9 +110,26 @@ show_percentage = false
 
 [node name="Label" type="Label" parent="."]
 offset_left = -69.0
-offset_top = -44.0
+offset_top = -72.0
 offset_right = 69.0
-offset_bottom = -18.0
+offset_bottom = -46.0
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("7_0ds1b")
+
+[node name="score" type="Label" parent="."]
+offset_left = -64.0
+offset_top = -122.0
+offset_right = 74.0
+offset_bottom = -96.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_c8crk")
+
+[node name="username" type="Label" parent="."]
+offset_left = -105.0
+offset_top = -42.0
+offset_right = 105.0
+offset_bottom = -19.0
+horizontal_alignment = 1
+script = ExtResource("8_xlqrk")

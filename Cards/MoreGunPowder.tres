@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://cwwhp3ikyxhf7"]
+
+[ext_resource type="Script" path="res://Cards/blueprint/Card.gd" id="1_lb7xd"]
+
+[resource]
+script = ExtResource("1_lb7xd")
+card_name = ""
+card_abbreviation = ""
+rarity = 0
+card_text = ""
+damage = 0
+damage_percent = 0
+health = 0
+health_percent = 0
+attack_cooldown_seconds = 0
+attack_cooldown_percent = 0
+block_cooldown_seconds = 0
+block_cooldown_percent = 0
+reload_cooldown_percent = 0
+reload_cooldown_seconds = 0
+ammo = 0
+speed = 0
+speed_percent = 0
+bullet_speed = 0
+bullet_speed_percent = 100
